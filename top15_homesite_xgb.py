@@ -25,7 +25,7 @@ test_file = "../input/test.csv"
 sample_submission = "../input/sample_submission.csv"
 submission_filename = "god_of_overfitting_spare_us.csv"
 
-xbg_params = {
+xgb_params = {
     'seed': 0,
     'colsample_bytree': 0.8,
     'silent': 1,
@@ -266,9 +266,9 @@ if __name__ == "__main__":
     dtrain = xgb.DMatrix(x_train, label=y_train)
     dtrain_tc = xgb.DMatrix(x_train_tc, label=y_train)
 
-    gbdt = xgb.train(xbg_params, dtrain, best_nrounds - 100)
-    xbg_params['eta'] = 0.01
-    gbdt = xgb.train(xbg_params, dtrain_tc, 300, xgb_model=gbdt)
+    gbdt = xgb.train(xgb_params, dtrain, best_nrounds - 100)
+    xgb_params['eta'] = 0.01
+    gbdt = xgb.train(xgb_params, dtrain_tc, 300, xgb_model=gbdt)
 
     dtest = xgb.DMatrix(x_test)
     submission = pd.read_csv(sample_submission)
